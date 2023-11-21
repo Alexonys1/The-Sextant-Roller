@@ -6,24 +6,30 @@ from game_manager.items import Item, Sextant, Compass, ChargedCompass
 
 # TODO: Use loguru!!!
 class Inventory (metaclass=Singleton):
+    """
+    Класс инвентаря, хранящий в себе информацию о ячейках в нём в виде:
+    номер ячейки - содержимое. Всего есть 60 ячеек.
+    В инвентаре 12 столбцов по 5 строк в каждом.
+    """
     def __init__(self):
         self._inventory_cells = {num: None for num in range(1, 61)}
 
     def select_using_item(self, cell_number: int) -> None:
         """
-        Запоминает предмет, который использует игрок правой кнопкой мыши.
+        Запомнить предмет, который использует игрок правой кнопкой мыши.
 
         :param cell_number: Номер ячейки инвентаря (1-60).
         :type cell_number: int
 
         :raises InventoryCellIsEmpty: если ячейка пуста.
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
 
         :rtype: None
         """
 
     def unselect_using_item(self) -> None:
         """
-        Забывает предмет, используемый игроком правой кнопкой мыши.
+        Забыть предмет, используемый игроком правой кнопкой мыши.
 
         :raises ItemIsNoSelected: если не было выделенного (запомненного) предмета.
 
@@ -38,6 +44,70 @@ class Inventory (metaclass=Singleton):
         предметы будут отниматься по единице, начиная с первого.
 
         :raises ItemsHaveRunOut: когда закончились предметы в инвентаре.
+
+        :rtype: None
+        """
+
+
+    def put_sextant_stack(self, cell_number: Optional[int]) -> None:
+        """
+        Положить стак секстантов в ячейку инвентаря. Если не указать
+        номер ячейки, то секстанты поместятся в инвентарь автоматически.
+
+        :param cell_number: номер ячейки инвентаря.
+        :type cell_number: Optional[int]
+
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
+
+        :rtype: None
+        """
+
+    def put_compass_stack(self, cell_number: Optional[int]) -> None:
+        """
+        Положить компасы в ячейку инвентаря. Если не указать номер ячейки,
+        то компасы поместятся в инвентарь автоматически.
+
+        :param cell_number: номер ячейки инвентаря.
+        :type cell_number: Optional[int]
+
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
+
+        :rtype: None
+        """
+
+
+    def remove_sextant_stack(self, cell_number: int) -> None:
+        """
+        Удалить весь стак секстантов в указанной ячейке.
+
+        :param cell_number: номер ячейки инвентаря.
+        :type cell_number: int
+
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
+
+        :rtype: None
+        """
+
+    def remove_compass_stack(self, cell_number: int) -> None:
+        """
+        Удалить весь стак компасов в указанной ячейке.
+
+        :param cell_number: номер ячейки инвентаря.
+        :type cell_number: int
+
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
+
+        :rtype: None
+        """
+
+    def remove_charged_compass_stack(self, cell_number: int) -> None:
+        """
+        Удалить весь стак заряженных компасов в указанной ячейке.
+
+        :param cell_number: номер ячейки инвентаря.
+        :type cell_number: int
+
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
 
         :rtype: None
         """

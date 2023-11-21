@@ -4,6 +4,11 @@ from game_manager.data_classes import Point, Region
 
 
 class User (metaclass=Singleton):
+    """
+    Класс пользователя, отвечающий за взаимодействие с игрой путём
+    совершения нажатий кнопок клавиатуры и мыши. Может быть создан
+    только в единственном экземпляре (Singleton).
+    """
     def __init__(self):
         self._inventory = Inventory()
 
@@ -15,6 +20,7 @@ class User (metaclass=Singleton):
         :type cell_number: int
 
         :raises InventoryCellIsEmpty: если ячейка пуста.
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
 
         :rtype: None
         """
@@ -27,6 +33,7 @@ class User (metaclass=Singleton):
         :type cell_number: int
 
         :raises InventoryCellIsEmpty: если ячейка пуста.
+        :raises IncorrectInventoryCellNumber: если нет такой ячейки.
 
         :rtype: None
         """
