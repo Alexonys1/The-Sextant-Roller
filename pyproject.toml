@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "The-Sextant-Roller"
+version = "0.1.0"
+description = "This program can roll sextants and save useful properties."
+authors = ["Alex <leha.bondar.05@mail.ru>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
