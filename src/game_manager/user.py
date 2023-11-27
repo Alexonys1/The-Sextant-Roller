@@ -92,6 +92,13 @@ class User (metaclass=Singleton):
         """
         # TODO: Написать функции для каждого действия.
 
+    def open_user_stash(self) -> None:
+        """
+        Открыть тайник игрока.
+
+        :rtype: None
+        """
+
     def where_are_sextants_in_inventory(self) -> list[int]:
         pass
 

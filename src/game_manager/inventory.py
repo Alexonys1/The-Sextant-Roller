@@ -4,12 +4,12 @@ from game_manager.singleton import Singleton
 from game_manager.items import Item, Sextant, Compass, ChargedCompass
 
 
-# TODO: Use loguru!!!
 class Inventory (metaclass=Singleton):
     """
     Класс инвентаря, хранящий в себе информацию о ячейках в нём в виде:
     номер ячейки - содержимое. Всего есть 60 ячеек.
     В инвентаре 12 столбцов по 5 строк в каждом.
+    Класс может быть создан только в единственном экземпляре.
     """
     def __init__(self):
         self._inventory_cells = {num: None for num in range(1, 61)}

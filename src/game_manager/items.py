@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from abc import ABC
+from loguru import logger
 
 
 @dataclass
@@ -8,14 +9,15 @@ class Item (ABC):
     stack_size: int
 
     def __post_init__(self) -> None:
+        logger.debug(f"Был создан {self.__class__.__name__}({self.amount})")
         if self.amount > self.stack_size:
             raise ValueError(
-                f"amount ({self.amount}) не должно быть больше stack_size ({self.stack_size})!"
+                f"amount({self.amount}) не должно быть больше stack_size({self.stack_size})!"
             )
 
         elif self.amount < 0:
             raise ValueError(
-                f"amount ({self.amount}) не может быть отрицательным!"
+                f"amount({self.amount}) не может быть отрицательным!"
             )
 
 
@@ -39,4 +41,3 @@ class ChargedCompass (Item):
 
 if __name__ == '__main__':
     sextant = Sextant(amount=10)
-    print(sextant)
