@@ -6,4 +6,6 @@ from data_classes import Region
 def run_roll() -> None:
     user = User()
     user.open_user_stash()
-    user.move_to_region(Region(500, 500, 500, 500), duration=0.3)
+    for _ in range(10):
+        user.move_to_region(Region(500, 500, 500, 500), duration=0.3)
+        user.make_left_mouse_click()
