@@ -1,3 +1,10 @@
+from random import randint
+
+import pyautogui as pag
+
+from loguru import logger
+from pyclick import HumanClicker
+
 from game_manager.singleton import Singleton
 from game_manager.inventory import Inventory
 from game_manager.data_classes import Point, Region
@@ -46,7 +53,23 @@ class User (metaclass=Singleton):
         """Отжимает левый shift."""
         # Событие должно отслеживаться в классе.
 
-    def move_to_point(self, point: Point, duration: float, dispersion: float = 0) -> None:
+    def make_left_mouse_click(self) -> None:
+        """
+        Нажать левую кнопку мыши.
+
+        :rtype: None
+        """
+        pag.click(button="left")
+
+    def make_right_mouse_click(self) -> None:
+        """
+        Нажать правую кнопку мыши.
+
+        :rtype: None
+        """
+        pag.click(button="right")
+
+    def move_to_point(self, point: Point, duration: float, dispersion: int = 0) -> None:
         """
         Передвигает курсор мыши в указанную точку. Нужно задать время,
         через которое курсор будет в нужной точке. Можно ввести разброс в координатах
@@ -59,12 +82,16 @@ class User (metaclass=Singleton):
         :type duration: float
 
         :param dispersion: создаёт квадратную область вокрут point, на которую наведётся курсор. Сторона квадрата: 2*dispersion.
-        :type dispersion: float
+        :type dispersion: int
 
         :raises UncorrectedPoint: если введены несуществующие координаты.
 
         :rtype: None
         """
+        clicker = HumanClicker()
+        point_with_dispersion = point.create_new_point_with_dispersion(dispersion)
+        clicker.move(point_with_dispersion, duration=duration)
+        logger.debug(f"Курсор мыши переведён на {point_with_dispersion}")
 
     def move_to_region(self, region: Region, duration: float) -> None:
         """
@@ -82,6 +109,12 @@ class User (metaclass=Singleton):
 
         :rtype: None
         """
+        clicker = HumanClicker()
+        new_x = region.x_of_left_top_corner + randint(0, region.width)
+        new_y = region.y_of_left_top_corner + randint(0, region.height)
+        point = Point(new_x, new_y)
+        clicker.move(point, duration=duration)
+        logger.debug(f"Курсор мыши переведён на {point}")
 
     def move_to_top_stone_of_void(self) -> None:
         """

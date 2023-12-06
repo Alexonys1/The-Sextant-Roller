@@ -5,7 +5,7 @@ from game_manager.roller import run_roll
 
 logger.add(
     sink="logs.log",
-    format="[{time: DD.MM.YYYY HH:MM:SS} {level}]: {message}",
+    format="[{time: DD.MM.YYYY hh:mm:ss} {level}]: {message}",
     level="DEBUG"
 )
 
