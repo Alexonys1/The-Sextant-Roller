@@ -23,21 +23,14 @@ class Item (ABC):
 
 @dataclass
 class Sextant (Item):
-    amount: int
     stack_size: int = field(default=10, init=False, repr=False)
 
 
 @dataclass
 class Compass (Item):
-    amount: int
     stack_size: int = field(default=10, init=False, repr=False)
 
 
 @dataclass
 class ChargedCompass (Item):
-    amount: int
     stack_size: int = field(default=1, init=False, repr=False)
-
-
-if __name__ == '__main__':
-    sextant = Sextant(amount=10)
